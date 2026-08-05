@@ -1,0 +1,34 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EtlProject.Api", "EtlProject.Api\EtlProject.Api.csproj", "{352520EE-BE5A-4568-9A74-123456789012}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EtlProject.Data", "EtlProject.Data\EtlProject.Data.csproj", "{352520EE-BE5A-4568-9A74-123456789013}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EtlProject.Worker", "EtlProject.Worker\EtlProject.Worker.csproj", "{352520EE-BE5A-4568-9A74-123456789014}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{352520EE-BE5A-4568-9A74-123456789012}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{352520EE-BE5A-4568-9A74-123456789012}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{352520EE-BE5A-4568-9A74-123456789012}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{352520EE-BE5A-4568-9A74-123456789012}.Release|Any CPU.Build.0 = Release|Any CPU
+		{352520EE-BE5A-4568-9A74-123456789013}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{352520EE-BE5A-4568-9A74-123456789013}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{352520EE-BE5A-4568-9A74-123456789013}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{352520EE-BE5A-4568-9A74-123456789013}.Release|Any CPU.Build.0 = Release|Any CPU
+		{352520EE-BE5A-4568-9A74-123456789014}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{352520EE-BE5A-4568-9A74-123456789014}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{352520EE-BE5A-4568-9A74-123456789014}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{352520EE-BE5A-4568-9A74-123456789014}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

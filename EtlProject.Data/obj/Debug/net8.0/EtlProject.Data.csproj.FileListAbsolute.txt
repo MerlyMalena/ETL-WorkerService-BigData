@@ -1,0 +1,12 @@
+c:\Users\pc\Desktop\Big Data\Arquitectura\EtlProject.Data\bin\Debug\net8.0\EtlProject.Data.deps.json
+c:\Users\pc\Desktop\Big Data\Arquitectura\EtlProject.Data\bin\Debug\net8.0\EtlProject.Data.dll
+c:\Users\pc\Desktop\Big Data\Arquitectura\EtlProject.Data\bin\Debug\net8.0\EtlProject.Data.pdb
+c:\Users\pc\Desktop\Big Data\Arquitectura\EtlProject.Data\obj\Debug\net8.0\EtlProject.Data.csproj.AssemblyReference.cache
+c:\Users\pc\Desktop\Big Data\Arquitectura\EtlProject.Data\obj\Debug\net8.0\EtlProject.Data.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\pc\Desktop\Big Data\Arquitectura\EtlProject.Data\obj\Debug\net8.0\EtlProject.Data.AssemblyInfoInputs.cache
+c:\Users\pc\Desktop\Big Data\Arquitectura\EtlProject.Data\obj\Debug\net8.0\EtlProject.Data.AssemblyInfo.cs
+c:\Users\pc\Desktop\Big Data\Arquitectura\EtlProject.Data\obj\Debug\net8.0\EtlProject.Data.csproj.CoreCompileInputs.cache
+c:\Users\pc\Desktop\Big Data\Arquitectura\EtlProject.Data\obj\Debug\net8.0\EtlProject.Data.dll
+c:\Users\pc\Desktop\Big Data\Arquitectura\EtlProject.Data\obj\Debug\net8.0\refint\EtlProject.Data.dll
+c:\Users\pc\Desktop\Big Data\Arquitectura\EtlProject.Data\obj\Debug\net8.0\EtlProject.Data.pdb
+c:\Users\pc\Desktop\Big Data\Arquitectura\EtlProject.Data\obj\Debug\net8.0\ref\EtlProject.Data.dll
