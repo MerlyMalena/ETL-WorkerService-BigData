@@ -53,6 +53,7 @@ namespace EtlProject.Worker
                     services.AddScoped<IExtractor, ApiExtractor>();
                     services.AddScoped<IDataLoader, DataLoader>();
                     services.AddScoped<IDimensionLoader, DimensionLoaderService>(); // Servicio de Fase 2
+                    services.AddScoped<IFactLoader, FactLoaderService>(); // Servicio de Fase 3
 
                     services.AddHostedService<Worker>();
                 });

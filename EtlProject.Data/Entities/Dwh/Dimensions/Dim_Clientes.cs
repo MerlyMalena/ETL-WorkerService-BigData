@@ -7,10 +7,9 @@ namespace EtlProject.Data.Entities.Dwh.Dimensions
     public class Dim_Clientes
     {
         [Key]
-        public int ClienteKey { get; set; }
-        public string? IdOriginal { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int IdCliente { get; set; }
         public string? Nombre { get; set; }
-        public string? Correo { get; set; }
-        public string? Ubicacion { get; set; }
+        public string? Email { get; set; }
     }
 }

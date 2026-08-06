@@ -1,0 +1,65 @@
+REPORTE TÉCNICO: PROCESO ETL DE OPINIONES
+=========================================================
+
+1. DESCRIPCIÓN FUNCIONAL DEL PROCESO ETL
+---------------------------------------------------------
+El proceso ETL (Extracción, Transformación y Carga) ha sido desarrollado utilizando un Worker Service en .NET Core (C#) con el ORM Entity Framework Core. Este diseño permite una ejecución orquestada, automatizada e idempotente (se puede ejecutar múltiples veces sin duplicar datos).
+
+El proceso se divide en tres fases principales:
+
+FASE 1: EXTRACCIÓN Y STAGING
+El sistema se conecta de manera paralela a tres orígenes de datos heterogéneos:
+- Base de Datos Relacional (SQL Server OLTP).
+- Archivo Plano (CSV: surveys_part1.csv).
+- API REST (Mock API implementada en .NET).
+Toda la información obtenida es estandarizada temporalmente y cargada en la tabla `staging.ReviewStaging`. Esta tabla funciona como la única fuente de verdad transitoria, aislando la extracción de la transformación final.
+
+FASE 2: CARGA DE DIMENSIONES (TRANSFORMACIÓN)
+Utilizando los datos de Staging, el sistema extrae entidades únicas, limpia llaves primarias (convirtiendo cadenas como 'C001' a enteros '1') y hace cruces (Except) contra las dimensiones existentes en el Data Warehouse para insertar únicamente los registros faltantes. Las tablas de dimensiones cargadas son: Clientes, Productos, Fuentes, Clasificación y Tiempo.
+
+FASE 3: CARGA DE HECHOS (FACT TABLE)
+En el último paso, se toma el universo de datos en Staging, se generan las métricas (Rating, Cantidad, Puntaje de Satisfacción) y se cruzan con los IDs enteros generados en las Dimensiones. Finalmente, los datos se insertan en la tabla `Fact_Opiniones` vaciando previamente la tabla para evitar duplicidad, asegurando absoluta consistencia.
+
+
+2. DESCRIPCIÓN DE LAS TABLAS CARGADAS (MODELO ESTRELLA)
+---------------------------------------------------------
+El Data Warehouse analítico (SAOC_Analitico) está estructurado bajo un modelo de estrella clásico. A continuación, se detallan las tablas pobladas por el ETL:
+
+A. TABLAS DE DIMENSIÓN (Contexto descriptivo)
+
+1. Dim_Clientes (dbo.Dim_Clientes)
+   - Descripción: Almacena la información de los usuarios que realizaron las opiniones.
+   - Columnas Cargadas: IdCliente (PK entera, convertida desde string), Nombre, Email.
+
+2. Dim_Productos (dbo.Dim_Productos)
+   - Descripción: Catálogo de los productos o servicios que están siendo evaluados.
+   - Columnas Cargadas: IdProducto (PK entera), Nombre, Categoria.
+
+3. Dim_Fuentes (dbo.Dim_Fuentes)
+   - Descripción: Identifica de qué canal o medio provino la opinión.
+   - Columnas Cargadas: IdFuente (PK entera, ej: 1, 2, 3), NombreFuente, TipoFuente (CSV, API, DB).
+
+4. Dim_Clasificacion (dbo.Dim_Clasificacion)
+   - Descripción: Catálogo autogenerado (IDENTITY) para tipificar el sentimiento general de la opinión.
+   - Columnas Cargadas: IdClasificacion (PK autogenerada), NombreClasificacion (Positiva, Neutra, Negativa).
+
+5. Dim_Tiempo (dbo.Dim_Tiempo)
+   - Descripción: Dimensión de fecha que permite el análisis cronológico. 
+   - Columnas Cargadas: IdFecha (PK en formato yyyyMMdd), Fecha, Año (Anio), Mes, NombreMes, Dia, Trimestre, DiaSemana.
+
+B. TABLA DE HECHOS (Métricas)
+
+6. Fact_Opiniones (dbo.Fact_Opiniones)
+   - Descripción: Tabla central del modelo estrella. Guarda las métricas numéricas y las llaves foráneas que la conectan con las dimensiones.
+   - Columnas Cargadas:
+     - Llaves: IdOpinion (PK), IdCliente, IdProducto, IdFuente, IdClasificacion, IdFecha.
+     - Métricas/Hechos: PuntajeSatisfaccion (Calculado a partir de Rating), Rating (Escala numérica), Comentario, Cantidad (Valor 1 para conteos).
+
+
+3. ENLACE DEL REPOSITORIO (GITHUB)
+---------------------------------------------------------
+El código fuente de este proyecto se encuentra alojado y versionado en el siguiente repositorio de GitHub:
+
+-> ENLACE DE GITHUB: [Ingresar el enlace aquí, por ejemplo: https://github.com/tu-usuario/ETL-WorkerService-BigData]
+
+(Nota para el estudiante: Recuerda copiar la URL exacta de tu rama o repositorio antes de convertir este documento a PDF).

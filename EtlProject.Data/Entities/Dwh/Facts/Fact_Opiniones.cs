@@ -7,33 +7,16 @@ namespace EtlProject.Data.Entities.Dwh.Facts
     public class Fact_Opiniones
     {
         [Key]
-        public int OpinionKey { get; set; }
+        public int IdOpinion { get; set; }
+        public int IdCliente { get; set; }
+        public int IdProducto { get; set; }
+        public int IdFuente { get; set; }
+        public int IdClasificacion { get; set; }
+        public int IdFecha { get; set; }
         
-        // Foreign Keys
-        public int ClienteKey { get; set; }
-        public int ProductoKey { get; set; }
-        public int FuenteKey { get; set; }
-        public int TiempoKey { get; set; }
-        public int ClasificacionKey { get; set; }
-        
-        // Measures
-        public string? ComentarioOriginal { get; set; }
-        public decimal RatingOriginal { get; set; }
-        
-        // Navigation Properties (Opcionales, pero recomendadas en EF Core)
-        [ForeignKey(nameof(ClienteKey))]
-        public virtual Dimensions.Dim_Clientes? Cliente { get; set; }
-        
-        [ForeignKey(nameof(ProductoKey))]
-        public virtual Dimensions.Dim_Productos? Producto { get; set; }
-        
-        [ForeignKey(nameof(FuenteKey))]
-        public virtual Dimensions.Dim_Fuentes? Fuente { get; set; }
-        
-        [ForeignKey(nameof(TiempoKey))]
-        public virtual Dimensions.Dim_Tiempo? Tiempo { get; set; }
-        
-        [ForeignKey(nameof(ClasificacionKey))]
-        public virtual Dimensions.Dim_Clasificacion? Clasificacion { get; set; }
+        public int? PuntajeSatisfaccion { get; set; }
+        public decimal? Rating { get; set; }
+        public string? Comentario { get; set; }
+        public int? Cantidad { get; set; }
     }
 }

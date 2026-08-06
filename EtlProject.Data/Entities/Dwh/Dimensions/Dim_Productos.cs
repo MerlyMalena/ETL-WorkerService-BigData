@@ -7,10 +7,9 @@ namespace EtlProject.Data.Entities.Dwh.Dimensions
     public class Dim_Productos
     {
         [Key]
-        public int ProductoKey { get; set; }
-        public string? IdOriginal { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int IdProducto { get; set; }
         public string? Nombre { get; set; }
         public string? Categoria { get; set; }
-        public decimal? Precio { get; set; }
     }
 }

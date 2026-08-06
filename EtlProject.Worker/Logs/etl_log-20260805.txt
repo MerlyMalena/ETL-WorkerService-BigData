@@ -4156,3 +4156,495 @@ CREATE TABLE [dbo].[Dim_Clasificacion] (
 2026-08-05 21:36:20.606 -04:00 [INF] Proceso de extracción finalizado en 1035 ms.
 2026-08-05 21:36:20.607 -04:00 [INF] Esperando para el próximo ciclo ETL...
 2026-08-05 21:37:53.339 -04:00 [INF] Application is shutting down...
+2026-08-05 22:13:48.424 -04:00 [INF] Iniciando el Worker Service del ETL...
+2026-08-05 22:13:49.300 -04:00 [INF] Iniciando Proceso ETL (Fase de Extracción) a las: "2026-08-05T22:13:49.2949971-04:00"
+2026-08-05 22:13:49.377 -04:00 [INF] Lanzando tareas de extracción en paralelo...
+2026-08-05 22:13:49.380 -04:00 [INF] Iniciando extracción desde CSV: surveys_part1.csv
+2026-08-05 22:13:49.399 -04:00 [INF] Iniciando extracción desde Base de Datos Relacional (OLTP).
+2026-08-05 22:13:49.435 -04:00 [INF] Extracción CSV completada. 500 registros obtenidos.
+2026-08-05 22:13:49.478 -04:00 [INF] Iniciando extracción desde API REST: http://localhost:5000/api/SocialComments
+2026-08-05 22:13:49.491 -04:00 [INF] Start processing HTTP request GET http://localhost:5000/api/SocialComments
+2026-08-05 22:13:49.496 -04:00 [INF] Sending HTTP request GET http://localhost:5000/api/SocialComments
+2026-08-05 22:13:49.528 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-08-05 22:13:49.530 -04:00 [INF] Hosting environment: Production
+2026-08-05 22:13:49.530 -04:00 [INF] Content root path: C:\Users\pc\Desktop\Big Data\Arquitectura\EtlProject.Worker
+2026-08-05 22:13:49.575 -04:00 [INF] Received HTTP response headers after 76.4042ms - 200
+2026-08-05 22:13:49.580 -04:00 [INF] End processing HTTP request after 95.116ms - 200
+2026-08-05 22:13:49.606 -04:00 [INF] Extracción API completada. 200 registros obtenidos.
+2026-08-05 22:13:49.619 -04:00 [INF] Extracción DB completada. 318 registros obtenidos.
+2026-08-05 22:13:49.623 -04:00 [INF] Extracción completada. Total registros consolidados: 1018
+2026-08-05 22:13:49.625 -04:00 [INF] Iniciando carga de datos consolidados en la capa de Staging...
+2026-08-05 22:13:49.626 -04:00 [INF] Verificando existencia de la Base de Datos Staging...
+2026-08-05 22:13:49.983 -04:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-08-05 22:13:50.045 -04:00 [INF] Executed DbCommand (54ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2026-08-05 22:13:50.062 -04:00 [INF] Executed DbCommand (11ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name = 'staging') BEGIN EXEC('CREATE SCHEMA [staging]') END;
+2026-08-05 22:13:50.140 -04:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF SCHEMA_ID(N'staging') IS NULL EXEC(N'CREATE SCHEMA [staging];');
+2026-08-05 22:13:50.145 -04:00 [ERR] Failed executing DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [dbo].[Dim_Clasificacion] (
+    [ClasificacionKey] int NOT NULL IDENTITY,
+    [RangoInicio] decimal(18,2) NOT NULL,
+    [RangoFin] decimal(18,2) NOT NULL,
+    [Categoria] nvarchar(max) NULL,
+    CONSTRAINT [PK_Dim_Clasificacion] PRIMARY KEY ([ClasificacionKey])
+);
+2026-08-05 22:13:50.149 -04:00 [INF] Vaciando tabla temporal de Staging...
+2026-08-05 22:13:50.465 -04:00 [INF] Extracción y consolidación finalizada exitosamente. 1018 registros insertados en la tabla de Staging listos para la futura fase de Transformación y Carga.
+2026-08-05 22:13:50.467 -04:00 [INF] Iniciando Carga de Dimensiones desde el área de Staging...
+2026-08-05 22:13:50.753 -04:00 [ERR] Failed executing DbCommand (8ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = Int32), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime2), @p4='?' (DbType = Int32), @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (DbType = Int32), @p8='?' (DbType = Int32), @p9='?' (DbType = DateTime2), @p10='?' (DbType = Int32), @p11='?' (DbType = Int32), @p12='?' (DbType = Int32), @p13='?' (DbType = Int32), @p14='?' (DbType = Int32), @p15='?' (DbType = DateTime2), @p16='?' (DbType = Int32), @p17='?' (DbType = Int32), @p18='?' (DbType = Int32), @p19='?' (DbType = Int32), @p20='?' (DbType = Int32), @p21='?' (DbType = DateTime2), @p22='?' (DbType = Int32), @p23='?' (DbType = Int32), @p24='?' (DbType = Int32), @p25='?' (DbType = Int32), @p26='?' (DbType = Int32), @p27='?' (DbType = DateTime2), @p28='?' (DbType = Int32), @p29='?' (DbType = Int32), @p30='?' (DbType = Int32), @p31='?' (DbType = Int32), @p32='?' (DbType = Int32), @p33='?' (DbType = DateTime2), @p34='?' (DbType = Int32), @p35='?' (DbType = Int32), @p36='?' (DbType = Int32), @p37='?' (DbType = Int32), @p38='?' (DbType = Int32), @p39='?' (DbType = DateTime2), @p40='?' (DbType = Int32), @p41='?' (DbType = Int32), @p42='?' (DbType = Int32), @p43='?' (DbType = Int32), @p44='?' (DbType = Int32), @p45='?' (DbType = DateTime2), @p46='?' (DbType = Int32), @p47='?' (DbType = Int32), @p48='?' (DbType = Int32), @p49='?' (DbType = Int32), @p50='?' (DbType = Int32), @p51='?' (DbType = DateTime2), @p52='?' (DbType = Int32), @p53='?' (DbType = Int32), @p54='?' (DbType = Int32), @p55='?' (DbType = Int32), @p56='?' (DbType = Int32), @p57='?' (DbType = DateTime2), @p58='?' (DbType = Int32), @p59='?' (DbType = Int32), @p60='?' (DbType = Int32), @p61='?' (DbType = Int32), @p62='?' (DbType = Int32), @p63='?' (DbType = DateTime2), @p64='?' (DbType = Int32), @p65='?' (DbType = Int32), @p66='?' (DbType = Int32), @p67='?' (DbType = Int32), @p68='?' (DbType = Int32), @p69='?' (DbType = DateTime2), @p70='?' (DbType = Int32), @p71='?' (DbType = Int32), @p72='?' (DbType = Int32), @p73='?' (DbType = Int32), @p74='?' (DbType = Int32), @p75='?' (DbType = DateTime2), @p76='?' (DbType = Int32), @p77='?' (DbType = Int32), @p78='?' (DbType = Int32), @p79='?' (DbType = Int32), @p80='?' (DbType = Int32), @p81='?' (DbType = DateTime2), @p82='?' (DbType = Int32), @p83='?' (DbType = Int32), @p84='?' (DbType = Int32), @p85='?' (DbType = Int32), @p86='?' (DbType = Int32), @p87='?' (DbType = DateTime2), @p88='?' (DbType = Int32), @p89='?' (DbType = Int32), @p90='?' (DbType = Int32), @p91='?' (DbType = Int32), @p92='?' (DbType = Int32), @p93='?' (DbType = DateTime2), @p94='?' (DbType = Int32), @p95='?' (DbType = Int32), @p96='?' (DbType = Int32), @p97='?' (DbType = Int32), @p98='?' (DbType = Int32), @p99='?' (DbType = DateTime2), @p100='?' (DbType = Int32), @p101='?' (DbType = Int32), @p102='?' (DbType = Int32), @p103='?' (DbType = Int32), @p104='?' (DbType = Int32), @p105='?' (DbType = DateTime2), @p106='?' (DbType = Int32), @p107='?' (DbType = Int32), @p108='?' (DbType = Int32), @p109='?' (DbType = Int32), @p110='?' (DbType = Int32), @p111='?' (DbType = DateTime2), @p112='?' (DbType = Int32), @p113='?' (DbType = Int32), @p114='?' (DbType = Int32), @p115='?' (DbType = Int32), @p116='?' (DbType = Int32), @p117='?' (DbType = DateTime2), @p118='?' (DbType = Int32), @p119='?' (DbType = Int32), @p120='?' (DbType = Int32), @p121='?' (DbType = Int32), @p122='?' (DbType = Int32), @p123='?' (DbType = DateTime2), @p124='?' (DbType = Int32), @p125='?' (DbType = Int32), @p126='?' (DbType = Int32), @p127='?' (DbType = Int32), @p128='?' (DbType = Int32), @p129='?' (DbType = DateTime2), @p130='?' (DbType = Int32), @p131='?' (DbType = Int32), @p132='?' (DbType = Int32), @p133='?' (DbType = Int32), @p134='?' (DbType = Int32), @p135='?' (DbType = DateTime2), @p136='?' (DbType = Int32), @p137='?' (DbType = Int32), @p138='?' (DbType = Int32), @p139='?' (DbType = Int32), @p140='?' (DbType = Int32), @p141='?' (DbType = DateTime2), @p142='?' (DbType = Int32), @p143='?' (DbType = Int32), @p144='?' (DbType = Int32), @p145='?' (DbType = Int32), @p146='?' (DbType = Int32), @p147='?' (DbType = DateTime2), @p148='?' (DbType = Int32), @p149='?' (DbType = Int32), @p150='?' (DbType = Int32), @p151='?' (DbType = Int32), @p152='?' (DbType = Int32), @p153='?' (DbType = DateTime2), @p154='?' (DbType = Int32), @p155='?' (DbType = Int32), @p156='?' (DbType = Int32), @p157='?' (DbType = Int32), @p158='?' (DbType = Int32), @p159='?' (DbType = DateTime2), @p160='?' (DbType = Int32), @p161='?' (DbType = Int32), @p162='?' (DbType = Int32), @p163='?' (DbType = Int32), @p164='?' (DbType = Int32), @p165='?' (DbType = DateTime2), @p166='?' (DbType = Int32), @p167='?' (DbType = Int32), @p168='?' (DbType = Int32), @p169='?' (DbType = Int32), @p170='?' (DbType = Int32), @p171='?' (DbType = DateTime2), @p172='?' (DbType = Int32), @p173='?' (DbType = Int32), @p174='?' (DbType = Int32), @p175='?' (DbType = Int32), @p176='?' (DbType = Int32), @p177='?' (DbType = DateTime2), @p178='?' (DbType = Int32), @p179='?' (DbType = Int32), @p180='?' (DbType = Int32), @p181='?' (DbType = Int32), @p182='?' (DbType = Int32), @p183='?' (DbType = DateTime2), @p184='?' (DbType = Int32), @p185='?' (DbType = Int32), @p186='?' (DbType = Int32), @p187='?' (DbType = Int32), @p188='?' (DbType = Int32), @p189='?' (DbType = DateTime2), @p190='?' (DbType = Int32), @p191='?' (DbType = Int32), @p192='?' (DbType = Int32), @p193='?' (DbType = Int32), @p194='?' (DbType = Int32), @p195='?' (DbType = DateTime2), @p196='?' (DbType = Int32), @p197='?' (DbType = Int32), @p198='?' (DbType = Int32), @p199='?' (DbType = Int32), @p200='?' (DbType = Int32), @p201='?' (DbType = DateTime2), @p202='?' (DbType = Int32), @p203='?' (DbType = Int32), @p204='?' (DbType = Int32), @p205='?' (DbType = Int32), @p206='?' (DbType = Int32), @p207='?' (DbType = DateTime2), @p208='?' (DbType = Int32), @p209='?' (DbType = Int32), @p210='?' (DbType = Int32), @p211='?' (DbType = Int32), @p212='?' (DbType = Int32), @p213='?' (DbType = DateTime2), @p214='?' (DbType = Int32), @p215='?' (DbType = Int32), @p216='?' (DbType = Int32), @p217='?' (DbType = Int32), @p218='?' (DbType = Int32), @p219='?' (DbType = DateTime2), @p220='?' (DbType = Int32), @p221='?' (DbType = Int32), @p222='?' (DbType = Int32), @p223='?' (DbType = Int32), @p224='?' (DbType = Int32), @p225='?' (DbType = DateTime2), @p226='?' (DbType = Int32), @p227='?' (DbType = Int32), @p228='?' (DbType = Int32), @p229='?' (DbType = Int32), @p230='?' (DbType = Int32), @p231='?' (DbType = DateTime2), @p232='?' (DbType = Int32), @p233='?' (DbType = Int32), @p234='?' (DbType = Int32), @p235='?' (DbType = Int32), @p236='?' (DbType = Int32), @p237='?' (DbType = DateTime2), @p238='?' (DbType = Int32), @p239='?' (DbType = Int32), @p240='?' (DbType = Int32), @p241='?' (DbType = Int32), @p242='?' (DbType = Int32), @p243='?' (DbType = DateTime2), @p244='?' (DbType = Int32), @p245='?' (DbType = Int32), @p246='?' (DbType = Int32), @p247='?' (DbType = Int32), @p248='?' (DbType = Int32), @p249='?' (DbType = DateTime2), @p250='?' (DbType = Int32), @p251='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+MERGE [dbo].[Dim_Tiempo] USING (
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, 0),
+(@p6, @p7, @p8, @p9, @p10, @p11, 1),
+(@p12, @p13, @p14, @p15, @p16, @p17, 2),
+(@p18, @p19, @p20, @p21, @p22, @p23, 3),
+(@p24, @p25, @p26, @p27, @p28, @p29, 4),
+(@p30, @p31, @p32, @p33, @p34, @p35, 5),
+(@p36, @p37, @p38, @p39, @p40, @p41, 6),
+(@p42, @p43, @p44, @p45, @p46, @p47, 7),
+(@p48, @p49, @p50, @p51, @p52, @p53, 8),
+(@p54, @p55, @p56, @p57, @p58, @p59, 9),
+(@p60, @p61, @p62, @p63, @p64, @p65, 10),
+(@p66, @p67, @p68, @p69, @p70, @p71, 11),
+(@p72, @p73, @p74, @p75, @p76, @p77, 12),
+(@p78, @p79, @p80, @p81, @p82, @p83, 13),
+(@p84, @p85, @p86, @p87, @p88, @p89, 14),
+(@p90, @p91, @p92, @p93, @p94, @p95, 15),
+(@p96, @p97, @p98, @p99, @p100, @p101, 16),
+(@p102, @p103, @p104, @p105, @p106, @p107, 17),
+(@p108, @p109, @p110, @p111, @p112, @p113, 18),
+(@p114, @p115, @p116, @p117, @p118, @p119, 19),
+(@p120, @p121, @p122, @p123, @p124, @p125, 20),
+(@p126, @p127, @p128, @p129, @p130, @p131, 21),
+(@p132, @p133, @p134, @p135, @p136, @p137, 22),
+(@p138, @p139, @p140, @p141, @p142, @p143, 23),
+(@p144, @p145, @p146, @p147, @p148, @p149, 24),
+(@p150, @p151, @p152, @p153, @p154, @p155, 25),
+(@p156, @p157, @p158, @p159, @p160, @p161, 26),
+(@p162, @p163, @p164, @p165, @p166, @p167, 27),
+(@p168, @p169, @p170, @p171, @p172, @p173, 28),
+(@p174, @p175, @p176, @p177, @p178, @p179, 29),
+(@p180, @p181, @p182, @p183, @p184, @p185, 30),
+(@p186, @p187, @p188, @p189, @p190, @p191, 31),
+(@p192, @p193, @p194, @p195, @p196, @p197, 32),
+(@p198, @p199, @p200, @p201, @p202, @p203, 33),
+(@p204, @p205, @p206, @p207, @p208, @p209, 34),
+(@p210, @p211, @p212, @p213, @p214, @p215, 35),
+(@p216, @p217, @p218, @p219, @p220, @p221, 36),
+(@p222, @p223, @p224, @p225, @p226, @p227, 37),
+(@p228, @p229, @p230, @p231, @p232, @p233, 38),
+(@p234, @p235, @p236, @p237, @p238, @p239, 39),
+(@p240, @p241, @p242, @p243, @p244, @p245, 40),
+(@p246, @p247, @p248, @p249, @p250, @p251, 41)) AS i ([Anio], [Dia], [DiaSemana], [Fecha], [Mes], [Trimestre], _Position) ON 1=0
+WHEN NOT MATCHED THEN
+INSERT ([Anio], [Dia], [DiaSemana], [Fecha], [Mes], [Trimestre])
+VALUES (i.[Anio], i.[Dia], i.[DiaSemana], i.[Fecha], i.[Mes], i.[Trimestre])
+OUTPUT INSERTED.[TiempoKey], i._Position;
+2026-08-05 22:13:50.769 -04:00 [ERR] An exception occurred in the database while saving changes for context type 'EtlProject.Data.Contexts.EtlDbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'Anio'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__209_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+ClientConnectionId:55d3b41b-bc51-44f0-8780-ee1026ae1227
+Error Number:207,State:1,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'Anio'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__209_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+ClientConnectionId:55d3b41b-bc51-44f0-8780-ee1026ae1227
+Error Number:207,State:1,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+2026-08-05 22:13:50.775 -04:00 [ERR] Error crítico durante la carga de dimensiones.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'Anio'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__209_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+ClientConnectionId:55d3b41b-bc51-44f0-8780-ee1026ae1227
+Error Number:207,State:1,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at EtlProject.Worker.Services.DimensionLoaderService.LoadDimTiempoAsync() in C:\Users\pc\Desktop\Big Data\Arquitectura\EtlProject.Worker\Services\DimensionLoaderService.cs:line 73
+   at EtlProject.Worker.Services.DimensionLoaderService.LoadDimensionsAsync() in C:\Users\pc\Desktop\Big Data\Arquitectura\EtlProject.Worker\Services\DimensionLoaderService.cs:line 32
+2026-08-05 22:13:50.784 -04:00 [INF] Proceso de extracción finalizado en 1479 ms.
+2026-08-05 22:13:50.785 -04:00 [INF] Esperando para el próximo ciclo ETL...
+2026-08-05 22:17:43.351 -04:00 [INF] Application is shutting down...
+2026-08-05 22:17:48.004 -04:00 [INF] Iniciando el Worker Service del ETL...
+2026-08-05 22:17:48.630 -04:00 [INF] Iniciando Proceso ETL (Fase de Extracción) a las: "2026-08-05T22:17:48.6246934-04:00"
+2026-08-05 22:17:48.701 -04:00 [INF] Lanzando tareas de extracción en paralelo...
+2026-08-05 22:17:48.704 -04:00 [INF] Iniciando extracción desde CSV: surveys_part1.csv
+2026-08-05 22:17:48.719 -04:00 [INF] Iniciando extracción desde Base de Datos Relacional (OLTP).
+2026-08-05 22:17:48.748 -04:00 [INF] Extracción CSV completada. 500 registros obtenidos.
+2026-08-05 22:17:48.790 -04:00 [INF] Iniciando extracción desde API REST: http://localhost:5000/api/SocialComments
+2026-08-05 22:17:48.802 -04:00 [INF] Start processing HTTP request GET http://localhost:5000/api/SocialComments
+2026-08-05 22:17:48.805 -04:00 [INF] Sending HTTP request GET http://localhost:5000/api/SocialComments
+2026-08-05 22:17:48.831 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-08-05 22:17:48.832 -04:00 [INF] Hosting environment: Production
+2026-08-05 22:17:48.832 -04:00 [INF] Content root path: C:\Users\pc\Desktop\Big Data\Arquitectura\EtlProject.Worker
+2026-08-05 22:17:48.851 -04:00 [INF] Received HTTP response headers after 43.511ms - 200
+2026-08-05 22:17:48.855 -04:00 [INF] End processing HTTP request after 57.0389ms - 200
+2026-08-05 22:17:48.882 -04:00 [INF] Extracción API completada. 200 registros obtenidos.
+2026-08-05 22:17:48.908 -04:00 [INF] Extracción DB completada. 318 registros obtenidos.
+2026-08-05 22:17:48.914 -04:00 [INF] Extracción completada. Total registros consolidados: 1018
+2026-08-05 22:17:48.915 -04:00 [INF] Iniciando carga de datos consolidados en la capa de Staging...
+2026-08-05 22:17:48.916 -04:00 [INF] Verificando existencia de la Base de Datos Staging...
+2026-08-05 22:17:49.177 -04:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-08-05 22:17:49.221 -04:00 [INF] Executed DbCommand (36ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2026-08-05 22:17:49.230 -04:00 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name = 'staging') BEGIN EXEC('CREATE SCHEMA [staging]') END;
+2026-08-05 22:17:49.283 -04:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF SCHEMA_ID(N'staging') IS NULL EXEC(N'CREATE SCHEMA [staging];');
+2026-08-05 22:17:49.289 -04:00 [ERR] Failed executing DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [dbo].[Dim_Clasificacion] (
+    [IdClasificacion] int NOT NULL,
+    [NombreClasificacion] nvarchar(max) NULL,
+    CONSTRAINT [PK_Dim_Clasificacion] PRIMARY KEY ([IdClasificacion])
+);
+2026-08-05 22:17:49.292 -04:00 [INF] Vaciando tabla temporal de Staging...
+2026-08-05 22:17:49.639 -04:00 [INF] Extracción y consolidación finalizada exitosamente. 1018 registros insertados en la tabla de Staging listos para la futura fase de Transformación y Carga.
+2026-08-05 22:17:49.640 -04:00 [INF] Iniciando Carga de Dimensiones desde el área de Staging...
+2026-08-05 22:17:49.863 -04:00 [INF] Insertados 319 nuevos registros en Dim_Tiempo.
+2026-08-05 22:17:49.931 -04:00 [INF] Insertados 3 nuevos registros en Dim_Fuentes.
+2026-08-05 22:17:49.964 -04:00 [ERR] Failed executing DbCommand (9ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (Size = 4000), @p2='?' (DbType = Int32), @p3='?' (Size = 4000), @p4='?' (DbType = Int32), @p5='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [dbo].[Dim_Clasificacion] ([IdClasificacion], [NombreClasificacion])
+VALUES (@p0, @p1),
+(@p2, @p3),
+(@p4, @p5);
+2026-08-05 22:17:49.975 -04:00 [ERR] An exception occurred in the database while saving changes for context type 'EtlProject.Data.Contexts.EtlDbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert explicit value for identity column in table 'Dim_Clasificacion' when IDENTITY_INSERT is set to OFF.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__209_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+ClientConnectionId:fbeda69b-1459-474b-84d9-f0189f59c021
+Error Number:544,State:1,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert explicit value for identity column in table 'Dim_Clasificacion' when IDENTITY_INSERT is set to OFF.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__209_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+ClientConnectionId:fbeda69b-1459-474b-84d9-f0189f59c021
+Error Number:544,State:1,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+2026-08-05 22:17:49.982 -04:00 [ERR] Error crítico durante la carga de dimensiones.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert explicit value for identity column in table 'Dim_Clasificacion' when IDENTITY_INSERT is set to OFF.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__209_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+ClientConnectionId:fbeda69b-1459-474b-84d9-f0189f59c021
+Error Number:544,State:1,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at EtlProject.Worker.Services.DimensionLoaderService.LoadDimClasificacionAsync() in C:\Users\pc\Desktop\Big Data\Arquitectura\EtlProject.Worker\Services\DimensionLoaderService.cs:line 119
+   at EtlProject.Worker.Services.DimensionLoaderService.LoadDimensionsAsync() in C:\Users\pc\Desktop\Big Data\Arquitectura\EtlProject.Worker\Services\DimensionLoaderService.cs:line 31
+2026-08-05 22:17:49.991 -04:00 [INF] Proceso de extracción finalizado en 1357 ms.
+2026-08-05 22:17:49.992 -04:00 [INF] Esperando para el próximo ciclo ETL...
+2026-08-05 22:19:09.759 -04:00 [INF] Application is shutting down...
+2026-08-05 22:19:14.566 -04:00 [INF] Iniciando el Worker Service del ETL...
+2026-08-05 22:19:15.264 -04:00 [INF] Iniciando Proceso ETL (Fase de Extracción) a las: "2026-08-05T22:19:15.2583140-04:00"
+2026-08-05 22:19:15.336 -04:00 [INF] Lanzando tareas de extracción en paralelo...
+2026-08-05 22:19:15.339 -04:00 [INF] Iniciando extracción desde CSV: surveys_part1.csv
+2026-08-05 22:19:15.354 -04:00 [INF] Iniciando extracción desde Base de Datos Relacional (OLTP).
+2026-08-05 22:19:15.384 -04:00 [INF] Extracción CSV completada. 500 registros obtenidos.
+2026-08-05 22:19:15.419 -04:00 [INF] Iniciando extracción desde API REST: http://localhost:5000/api/SocialComments
+2026-08-05 22:19:15.432 -04:00 [INF] Start processing HTTP request GET http://localhost:5000/api/SocialComments
+2026-08-05 22:19:15.435 -04:00 [INF] Sending HTTP request GET http://localhost:5000/api/SocialComments
+2026-08-05 22:19:15.456 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-08-05 22:19:15.457 -04:00 [INF] Hosting environment: Production
+2026-08-05 22:19:15.458 -04:00 [INF] Content root path: C:\Users\pc\Desktop\Big Data\Arquitectura\EtlProject.Worker
+2026-08-05 22:19:15.473 -04:00 [INF] Received HTTP response headers after 36.6885ms - 200
+2026-08-05 22:19:15.477 -04:00 [INF] End processing HTTP request after 50.8478ms - 200
+2026-08-05 22:19:15.514 -04:00 [INF] Extracción API completada. 200 registros obtenidos.
+2026-08-05 22:19:15.540 -04:00 [INF] Extracción DB completada. 318 registros obtenidos.
+2026-08-05 22:19:15.547 -04:00 [INF] Extracción completada. Total registros consolidados: 1018
+2026-08-05 22:19:15.550 -04:00 [INF] Iniciando carga de datos consolidados en la capa de Staging...
+2026-08-05 22:19:15.551 -04:00 [INF] Verificando existencia de la Base de Datos Staging...
+2026-08-05 22:19:15.812 -04:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-08-05 22:19:15.850 -04:00 [INF] Executed DbCommand (32ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2026-08-05 22:19:15.859 -04:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name = 'staging') BEGIN EXEC('CREATE SCHEMA [staging]') END;
+2026-08-05 22:19:15.914 -04:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF SCHEMA_ID(N'staging') IS NULL EXEC(N'CREATE SCHEMA [staging];');
+2026-08-05 22:19:15.920 -04:00 [ERR] Failed executing DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [dbo].[Dim_Clasificacion] (
+    [IdClasificacion] int NOT NULL IDENTITY,
+    [NombreClasificacion] nvarchar(max) NULL,
+    CONSTRAINT [PK_Dim_Clasificacion] PRIMARY KEY ([IdClasificacion])
+);
+2026-08-05 22:19:15.923 -04:00 [INF] Vaciando tabla temporal de Staging...
+2026-08-05 22:19:16.231 -04:00 [INF] Extracción y consolidación finalizada exitosamente. 1018 registros insertados en la tabla de Staging listos para la futura fase de Transformación y Carga.
+2026-08-05 22:19:16.235 -04:00 [INF] Iniciando Carga de Dimensiones desde el área de Staging...
+2026-08-05 22:19:16.440 -04:00 [INF] Insertados 3 registros base en Dim_Clasificacion.
+2026-08-05 22:19:16.537 -04:00 [INF] Insertados 530 nuevos registros en Dim_Clientes.
+2026-08-05 22:19:16.623 -04:00 [INF] Insertados 397 nuevos registros en Dim_Productos.
+2026-08-05 22:19:16.624 -04:00 [INF] Carga de Dimensiones finalizada exitosamente.
+2026-08-05 22:19:16.626 -04:00 [INF] Proceso de extracción finalizado en 1359 ms.
+2026-08-05 22:19:16.627 -04:00 [INF] Esperando para el próximo ciclo ETL...
+2026-08-05 22:40:22.220 -04:00 [INF] Application is shutting down...
+2026-08-05 22:40:32.324 -04:00 [INF] Iniciando el Worker Service del ETL...
+2026-08-05 22:40:32.443 -04:00 [INF] Iniciando Proceso ETL (Fase de Extracción) a las: "2026-08-05T22:40:32.4367160-04:00"
+2026-08-05 22:40:32.512 -04:00 [INF] Lanzando tareas de extracción en paralelo...
+2026-08-05 22:40:32.515 -04:00 [INF] Iniciando extracción desde CSV: surveys_part1.csv
+2026-08-05 22:40:32.531 -04:00 [INF] Iniciando extracción desde Base de Datos Relacional (OLTP).
+2026-08-05 22:40:32.559 -04:00 [INF] Extracción CSV completada. 500 registros obtenidos.
+2026-08-05 22:40:32.594 -04:00 [INF] Iniciando extracción desde API REST: http://localhost:5000/api/SocialComments
+2026-08-05 22:40:32.606 -04:00 [INF] Start processing HTTP request GET http://localhost:5000/api/SocialComments
+2026-08-05 22:40:32.609 -04:00 [INF] Sending HTTP request GET http://localhost:5000/api/SocialComments
+2026-08-05 22:40:32.633 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-08-05 22:40:32.634 -04:00 [INF] Hosting environment: Production
+2026-08-05 22:40:32.634 -04:00 [INF] Content root path: C:\Users\pc\Desktop\Big Data\Arquitectura\EtlProject.Worker
+2026-08-05 22:40:32.650 -04:00 [INF] Received HTTP response headers after 38.6886ms - 200
+2026-08-05 22:40:32.652 -04:00 [INF] End processing HTTP request after 51.3306ms - 200
+2026-08-05 22:40:32.675 -04:00 [INF] Extracción API completada. 200 registros obtenidos.
+2026-08-05 22:40:32.705 -04:00 [INF] Extracción DB completada. 318 registros obtenidos.
+2026-08-05 22:40:32.709 -04:00 [INF] Extracción completada. Total registros consolidados: 1018
+2026-08-05 22:40:32.711 -04:00 [INF] Iniciando carga de datos consolidados en la capa de Staging...
+2026-08-05 22:40:32.711 -04:00 [INF] Verificando existencia de la Base de Datos Staging...
+2026-08-05 22:40:32.958 -04:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-08-05 22:40:32.995 -04:00 [INF] Executed DbCommand (30ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2026-08-05 22:40:33.004 -04:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name = 'staging') BEGIN EXEC('CREATE SCHEMA [staging]') END;
+2026-08-05 22:40:33.056 -04:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF SCHEMA_ID(N'staging') IS NULL EXEC(N'CREATE SCHEMA [staging];');
+2026-08-05 22:40:33.061 -04:00 [ERR] Failed executing DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [dbo].[Dim_Clasificacion] (
+    [IdClasificacion] int NOT NULL IDENTITY,
+    [NombreClasificacion] nvarchar(max) NULL,
+    CONSTRAINT [PK_Dim_Clasificacion] PRIMARY KEY ([IdClasificacion])
+);
+2026-08-05 22:40:33.064 -04:00 [INF] Vaciando tabla temporal de Staging...
+2026-08-05 22:40:33.350 -04:00 [INF] Extracción y consolidación finalizada exitosamente. 1018 registros insertados en la tabla de Staging listos para la futura fase de Transformación y Carga.
+2026-08-05 22:40:33.351 -04:00 [INF] Iniciando Carga de Dimensiones desde el área de Staging...
+2026-08-05 22:40:33.603 -04:00 [INF] Carga de Dimensiones finalizada exitosamente.
+2026-08-05 22:40:33.606 -04:00 [INF] Iniciando Carga de Hechos (Fact_Opiniones) desde Staging...
+2026-08-05 22:40:33.607 -04:00 [INF] Vaciando tabla de hechos Fact_Opiniones...
+2026-08-05 22:40:33.918 -04:00 [INF] Carga de Hechos finalizada. 812 registros insertados en Fact_Opiniones.
+2026-08-05 22:40:33.921 -04:00 [INF] Proceso de extracción finalizado en 1474 ms.
+2026-08-05 22:40:33.921 -04:00 [INF] Esperando para el próximo ciclo ETL...
+2026-08-05 22:44:04.758 -04:00 [INF] Application is shutting down...
+2026-08-05 22:44:09.365 -04:00 [INF] Iniciando el Worker Service del ETL...
+2026-08-05 22:44:09.480 -04:00 [INF] Iniciando Proceso ETL (Fase de Extracción) a las: "2026-08-05T22:44:09.4745293-04:00"
+2026-08-05 22:44:09.550 -04:00 [INF] Lanzando tareas de extracción en paralelo...
+2026-08-05 22:44:09.552 -04:00 [INF] Iniciando extracción desde CSV: surveys_part1.csv
+2026-08-05 22:44:09.568 -04:00 [INF] Iniciando extracción desde Base de Datos Relacional (OLTP).
+2026-08-05 22:44:09.596 -04:00 [INF] Extracción CSV completada. 500 registros obtenidos.
+2026-08-05 22:44:09.635 -04:00 [INF] Iniciando extracción desde API REST: http://localhost:5000/api/SocialComments
+2026-08-05 22:44:09.647 -04:00 [INF] Start processing HTTP request GET http://localhost:5000/api/SocialComments
+2026-08-05 22:44:09.650 -04:00 [INF] Sending HTTP request GET http://localhost:5000/api/SocialComments
+2026-08-05 22:44:09.673 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-08-05 22:44:09.674 -04:00 [INF] Hosting environment: Production
+2026-08-05 22:44:09.674 -04:00 [INF] Content root path: C:\Users\pc\Desktop\Big Data\Arquitectura\EtlProject.Worker
+2026-08-05 22:44:09.692 -04:00 [INF] Received HTTP response headers after 39.5759ms - 200
+2026-08-05 22:44:09.695 -04:00 [INF] End processing HTTP request after 53.1872ms - 200
+2026-08-05 22:44:09.718 -04:00 [INF] Extracción API completada. 200 registros obtenidos.
+2026-08-05 22:44:09.742 -04:00 [INF] Extracción DB completada. 318 registros obtenidos.
+2026-08-05 22:44:09.746 -04:00 [INF] Extracción completada. Total registros consolidados: 1018
+2026-08-05 22:44:09.747 -04:00 [INF] Iniciando carga de datos consolidados en la capa de Staging...
+2026-08-05 22:44:09.747 -04:00 [INF] Verificando existencia de la Base de Datos Staging...
+2026-08-05 22:44:09.999 -04:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-08-05 22:44:10.034 -04:00 [INF] Executed DbCommand (28ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2026-08-05 22:44:10.044 -04:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name = 'staging') BEGIN EXEC('CREATE SCHEMA [staging]') END;
+2026-08-05 22:44:10.094 -04:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF SCHEMA_ID(N'staging') IS NULL EXEC(N'CREATE SCHEMA [staging];');
+2026-08-05 22:44:10.100 -04:00 [ERR] Failed executing DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [dbo].[Dim_Clasificacion] (
+    [IdClasificacion] int NOT NULL IDENTITY,
+    [NombreClasificacion] nvarchar(max) NULL,
+    CONSTRAINT [PK_Dim_Clasificacion] PRIMARY KEY ([IdClasificacion])
+);
+2026-08-05 22:44:10.103 -04:00 [INF] Vaciando tabla temporal de Staging...
+2026-08-05 22:44:10.368 -04:00 [INF] Extracción y consolidación finalizada exitosamente. 1018 registros insertados en la tabla de Staging listos para la futura fase de Transformación y Carga.
+2026-08-05 22:44:10.369 -04:00 [INF] Iniciando Carga de Dimensiones desde el área de Staging...
+2026-08-05 22:44:10.612 -04:00 [INF] Carga de Dimensiones finalizada exitosamente.
+2026-08-05 22:44:10.614 -04:00 [INF] Iniciando Carga de Hechos (Fact_Opiniones) desde Staging...
+2026-08-05 22:44:10.614 -04:00 [INF] Vaciando tabla de hechos Fact_Opiniones...
+2026-08-05 22:44:10.849 -04:00 [INF] Carga de Hechos finalizada. 812 registros insertados en Fact_Opiniones.
+2026-08-05 22:44:10.852 -04:00 [INF] Proceso de extracción finalizado en 1368 ms.
+2026-08-05 22:44:10.852 -04:00 [INF] Esperando para el próximo ciclo ETL...
+2026-08-05 22:53:51.147 -04:00 [INF] Application is shutting down...

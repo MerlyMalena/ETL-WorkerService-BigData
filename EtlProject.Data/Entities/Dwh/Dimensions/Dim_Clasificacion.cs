@@ -7,9 +7,8 @@ namespace EtlProject.Data.Entities.Dwh.Dimensions
     public class Dim_Clasificacion
     {
         [Key]
-        public int ClasificacionKey { get; set; }
-        public decimal RangoInicio { get; set; }
-        public decimal RangoFin { get; set; }
-        public string? Categoria { get; set; } // Positivo, Neutral, Negativo
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int IdClasificacion { get; set; }
+        public string? NombreClasificacion { get; set; }
     }
 }

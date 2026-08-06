@@ -62,6 +62,10 @@ namespace EtlProject.Worker
                         // Fase 2: Carga de Dimensiones
                         var dimensionLoader = scope.ServiceProvider.GetRequiredService<IDimensionLoader>();
                         await dimensionLoader.LoadDimensionsAsync();
+
+                        // Fase 3: Carga de la Tabla de Hechos
+                        var factLoader = scope.ServiceProvider.GetRequiredService<IFactLoader>();
+                        await factLoader.LoadFactsAsync();
                     }
                 }
                 catch (Exception ex)

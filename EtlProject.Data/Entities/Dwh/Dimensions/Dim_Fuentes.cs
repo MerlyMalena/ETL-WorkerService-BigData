@@ -7,8 +7,9 @@ namespace EtlProject.Data.Entities.Dwh.Dimensions
     public class Dim_Fuentes
     {
         [Key]
-        public int FuenteKey { get; set; }
-        public string? TipoFuente { get; set; } // SV, Relational DB, REST API
-        public string? Descripcion { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int IdFuente { get; set; }
+        public string? NombreFuente { get; set; }
+        public string? TipoFuente { get; set; }
     }
 }

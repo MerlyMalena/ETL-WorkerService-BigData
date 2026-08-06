@@ -8,10 +8,12 @@ namespace EtlProject.Data.Entities.Dwh.Dimensions
     public class Dim_Tiempo
     {
         [Key]
-        public int TiempoKey { get; set; }
+        public int IdFecha { get; set; }
         public DateTime Fecha { get; set; }
+        [Column("Año")]
         public int Anio { get; set; }
         public int Mes { get; set; }
+        public string? NombreMes { get; set; }
         public int Dia { get; set; }
         public int Trimestre { get; set; }
         public int DiaSemana { get; set; }
