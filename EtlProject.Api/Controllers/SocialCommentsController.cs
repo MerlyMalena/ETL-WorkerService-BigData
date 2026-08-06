@@ -25,10 +25,10 @@ namespace EtlProject.Api.Controllers
             var comments = new List<object>();
             var lines = await System.IO.File.ReadAllLinesAsync(filePath);
             
-            // Regex para separar por comas ignorando las comas que están dentro de comillas
+     
             var csvParser = new Regex(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
 
-            // Saltamos la primera línea (encabezados) y recorremos el resto
+        
             foreach (var line in lines.Skip(1))
             {
                 var parts = csvParser.Split(line);

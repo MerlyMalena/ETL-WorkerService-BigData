@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EtlProject.Data.Entities.Dwh.Facts
 {
-    [Table("Fact_Opiniones", Schema = "dwh")]
+    [Table("Fact_Opiniones", Schema = "dbo")]
     public class Fact_Opiniones
     {
         [Key]

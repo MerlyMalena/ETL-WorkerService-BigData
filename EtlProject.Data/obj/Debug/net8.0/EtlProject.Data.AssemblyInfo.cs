@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EtlProject.Data")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1ea3b99ee2adb246897b3d19e5c174026f2b3ad3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fbe993eb76963cab7f9dc4f5644833afbedba1d5")]
 [assembly: System.Reflection.AssemblyProductAttribute("EtlProject.Data")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EtlProject.Data")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

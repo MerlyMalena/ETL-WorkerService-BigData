@@ -10,3 +10,4 @@ c:\Users\pc\Desktop\Big Data\Arquitectura\EtlProject.Data\obj\Debug\net8.0\EtlPr
 c:\Users\pc\Desktop\Big Data\Arquitectura\EtlProject.Data\obj\Debug\net8.0\refint\EtlProject.Data.dll
 c:\Users\pc\Desktop\Big Data\Arquitectura\EtlProject.Data\obj\Debug\net8.0\EtlProject.Data.pdb
 c:\Users\pc\Desktop\Big Data\Arquitectura\EtlProject.Data\obj\Debug\net8.0\ref\EtlProject.Data.dll
+C:\Users\pc\Desktop\Big Data\Arquitectura\EtlProject.Data\obj\Debug\net8.0\EtlProject.Data.sourcelink.json

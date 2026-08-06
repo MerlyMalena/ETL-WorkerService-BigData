@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EtlProject.Data.Entities.Dwh.Dimensions
 {
-    [Table("Dim_Fuentes", Schema = "dwh")]
+    [Table("Dim_Fuentes", Schema = "dbo")]
     public class Dim_Fuentes
     {
         [Key]

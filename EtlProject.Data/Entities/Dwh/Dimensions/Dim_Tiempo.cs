@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EtlProject.Data.Entities.Dwh.Dimensions
 {
-    [Table("Dim_Tiempo", Schema = "dwh")]
+    [Table("Dim_Tiempo", Schema = "dbo")]
     public class Dim_Tiempo
     {
         [Key]
