@@ -58,6 +58,10 @@ namespace EtlProject.Worker
                     if (allExtractedRecords.Any())
                     {
                         await dataLoader.LoadToStagingAsync(allExtractedRecords);
+                        
+                        // Fase 2: Carga de Dimensiones
+                        var dimensionLoader = scope.ServiceProvider.GetRequiredService<IDimensionLoader>();
+                        await dimensionLoader.LoadDimensionsAsync();
                     }
                 }
                 catch (Exception ex)

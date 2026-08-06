@@ -49,10 +49,11 @@ namespace EtlProject.Worker
                     services.AddHttpClient("SocialCommentsClient");
 
                     services.AddTransient<IExtractor, CsvExtractor>();
-                    services.AddTransient<IExtractor, DatabaseExtractor>();
-                    services.AddTransient<IExtractor, ApiExtractor>();
-
+                    services.AddScoped<IExtractor, DatabaseExtractor>();
+                    services.AddScoped<IExtractor, ApiExtractor>();
                     services.AddScoped<IDataLoader, DataLoader>();
+                    services.AddScoped<IDimensionLoader, DimensionLoaderService>(); // Servicio de Fase 2
+
                     services.AddHostedService<Worker>();
                 });
     }
