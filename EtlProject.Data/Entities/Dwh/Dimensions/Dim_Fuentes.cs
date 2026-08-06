@@ -8,7 +8,7 @@ namespace EtlProject.Data.Entities.Dwh.Dimensions
     {
         [Key]
         public int FuenteKey { get; set; }
-        public string? TipoFuente { get; set; } // e.g. CSV, Relational DB, REST API
+        public string? TipoFuente { get; set; } // SV, Relational DB, REST API
         public string? Descripcion { get; set; }
     }
 }

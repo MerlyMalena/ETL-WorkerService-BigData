@@ -4176,11 +4176,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\pc\\Desktop\\Big Data\\Arquitectura\\EtlProject.Worker\\EtlProject.Worker.csproj",
+      "projectUniqueName": "C:\\Users\\pc\\Desktop\\Big Data\\Arquitectura\\EtlProject.Worker\\EtlProject.Worker.csproj",
       "projectName": "EtlProject.Worker",
-      "projectPath": "c:\\Users\\pc\\Desktop\\Big Data\\Arquitectura\\EtlProject.Worker\\EtlProject.Worker.csproj",
+      "projectPath": "C:\\Users\\pc\\Desktop\\Big Data\\Arquitectura\\EtlProject.Worker\\EtlProject.Worker.csproj",
       "packagesPath": "C:\\Users\\pc\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\pc\\Desktop\\Big Data\\Arquitectura\\EtlProject.Worker\\obj\\",
+      "outputPath": "C:\\Users\\pc\\Desktop\\Big Data\\Arquitectura\\EtlProject.Worker\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\pc\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -4196,8 +4196,8 @@
           "framework": "net8.0",
           "targetAlias": "net8.0",
           "projectReferences": {
-            "c:\\Users\\pc\\Desktop\\Big Data\\Arquitectura\\EtlProject.Data\\EtlProject.Data.csproj": {
-              "projectPath": "c:\\Users\\pc\\Desktop\\Big Data\\Arquitectura\\EtlProject.Data\\EtlProject.Data.csproj"
+            "C:\\Users\\pc\\Desktop\\Big Data\\Arquitectura\\EtlProject.Data\\EtlProject.Data.csproj": {
+              "projectPath": "C:\\Users\\pc\\Desktop\\Big Data\\Arquitectura\\EtlProject.Data\\EtlProject.Data.csproj"
             }
           }
         }

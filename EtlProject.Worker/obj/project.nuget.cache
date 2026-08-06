@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "JX5EyU085N4=",
+  "dgSpecHash": "hWslJBS22Vo=",
   "success": true,
-  "projectFilePath": "c:\\Users\\pc\\Desktop\\Big Data\\Arquitectura\\EtlProject.Worker\\EtlProject.Worker.csproj",
+  "projectFilePath": "C:\\Users\\pc\\Desktop\\Big Data\\Arquitectura\\EtlProject.Worker\\EtlProject.Worker.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\pc\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\pc\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

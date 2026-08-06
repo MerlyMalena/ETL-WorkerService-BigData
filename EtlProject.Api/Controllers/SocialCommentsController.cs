@@ -1,5 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace EtlProject.Api.Controllers
@@ -11,15 +14,38 @@ namespace EtlProject.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetComments()
         {
+            // Ruta relativa hacia el archivo CSV que está en el proyecto Worker
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "..", "EtlProject.Worker", "social_comments.csv");
             
-            await Task.Delay(500);
-
-            var comments = new List<object>
+            if (!System.IO.File.Exists(filePath))
             {
-                new { Id = "API_001", User = "C001", Product = "P001", Text = "Excelente producto, muy recomendado", Score = 5, Date = "2023-10-01T10:00:00Z" },
-                new { Id = "API_002", User = "C002", Product = "P002", Text = "Llegó roto, pésimo servicio", Score = 1, Date = "2023-10-02T11:30:00Z" },
-                new { Id = "API_003", User = "C003", Product = "P001", Text = "Cumple su función, pero podría ser mejor", Score = 3, Date = "2023-10-03T15:45:00Z" }
-            };
+                return NotFound(new { message = $"No se encontró el archivo CSV en: {filePath}" });
+            }
+
+            var comments = new List<object>();
+            var lines = await System.IO.File.ReadAllLinesAsync(filePath);
+            
+            // Regex para separar por comas ignorando las comas que están dentro de comillas
+            var csvParser = new Regex(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+
+            // Saltamos la primera línea (encabezados) y recorremos el resto
+            foreach (var line in lines.Skip(1))
+            {
+                var parts = csvParser.Split(line);
+                
+                if (parts.Length >= 6)
+                {
+                    comments.Add(new 
+                    {
+                        Id = parts[0].Trim('"'),
+                        User = parts[1].Trim('"'),
+                        Product = parts[2].Trim('"'),
+                        Date = parts[4].Trim('"'),
+                        Text = parts[5].Trim('"')
+                       
+                    });
+                }
+            }
 
             return Ok(comments);
         }

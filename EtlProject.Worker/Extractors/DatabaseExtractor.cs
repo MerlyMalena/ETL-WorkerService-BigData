@@ -39,7 +39,7 @@ namespace EtlProject.Worker.Extractors
                 using var connection = new SqlConnection(connectionString);
                 await connection.OpenAsync();
 
-                // Simulamos un query que une varias tablas del sistema OLTP
+              
                 var query = @"
                     SELECT 
                         IdOpinion as ReviewId, 

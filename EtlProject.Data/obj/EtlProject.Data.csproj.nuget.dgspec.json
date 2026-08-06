@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\pc\\Desktop\\Big Data\\Arquitectura\\EtlProject.Data\\EtlProject.Data.csproj": {}
+    "C:\\Users\\pc\\Desktop\\Big Data\\Arquitectura\\EtlProject.Data\\EtlProject.Data.csproj": {}
   },
   "projects": {
-    "c:\\Users\\pc\\Desktop\\Big Data\\Arquitectura\\EtlProject.Data\\EtlProject.Data.csproj": {
+    "C:\\Users\\pc\\Desktop\\Big Data\\Arquitectura\\EtlProject.Data\\EtlProject.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\pc\\Desktop\\Big Data\\Arquitectura\\EtlProject.Data\\EtlProject.Data.csproj",
+        "projectUniqueName": "C:\\Users\\pc\\Desktop\\Big Data\\Arquitectura\\EtlProject.Data\\EtlProject.Data.csproj",
         "projectName": "EtlProject.Data",
-        "projectPath": "c:\\Users\\pc\\Desktop\\Big Data\\Arquitectura\\EtlProject.Data\\EtlProject.Data.csproj",
+        "projectPath": "C:\\Users\\pc\\Desktop\\Big Data\\Arquitectura\\EtlProject.Data\\EtlProject.Data.csproj",
         "packagesPath": "C:\\Users\\pc\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\pc\\Desktop\\Big Data\\Arquitectura\\EtlProject.Data\\obj\\",
+        "outputPath": "C:\\Users\\pc\\Desktop\\Big Data\\Arquitectura\\EtlProject.Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\pc\\AppData\\Roaming\\NuGet\\NuGet.Config"

@@ -29,7 +29,7 @@ namespace EtlProject.Worker.Services
             {
                 _logger.LogInformation("Iniciando carga de datos consolidados en la capa de Staging...");
                 
-                // Asegurarse de que el esquema staging y la tabla existan
+              
                 _logger.LogInformation("Verificando existencia de la Base de Datos Staging...");
                 
                 await _dbContext.Database.EnsureCreatedAsync(); 
@@ -44,7 +44,7 @@ namespace EtlProject.Worker.Services
                     try { await databaseCreator.CreateTablesAsync(); } catch { }
                 }
 
-                // Inserción en Staging
+                // Staging (Insertar los datos)
                 await _dbContext.ReviewStaging.AddRangeAsync(data);
                 var savedCount = await _dbContext.SaveChangesAsync();
                 

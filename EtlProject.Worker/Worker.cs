@@ -25,8 +25,7 @@ namespace EtlProject.Worker
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            // Se ejecuta una vez por ciclo, o podrías usar un temporizador (ej. cada 24 hrs)
-            // Para propósitos académicos, simularemos que corre de inmediato.
+            // Se ejecuta una vez por ciclo
             while (!stoppingToken.IsCancellationRequested)
             {
                 _logger.LogInformation("Iniciando Proceso ETL (Fase de Extracción) a las: {time}", DateTimeOffset.Now);
@@ -41,14 +40,12 @@ namespace EtlProject.Worker
                     var extractors = scope.ServiceProvider.GetRequiredService<IEnumerable<IExtractor>>();
                     var dataLoader = scope.ServiceProvider.GetRequiredService<IDataLoader>();
 
-                    // 1. EXTRAER (E)
-                    // Rendimiento: Uso de paralelismo (async/await) para llamar a todas las fuentes simultáneamente.
                     var extractionTasks = extractors.Select(e => e.ExtractAsync());
                     
                     _logger.LogInformation("Lanzando tareas de extracción en paralelo...");
                     var resultsArray = await Task.WhenAll(extractionTasks);
 
-                    // Consolidar resultados
+                    
                     var allExtractedRecords = new List<ReviewStaging>();
                     foreach (var resultList in resultsArray)
                     {
@@ -57,7 +54,7 @@ namespace EtlProject.Worker
                     
                     _logger.LogInformation("Extracción completada. Total registros consolidados: {Count}", allExtractedRecords.Count);
 
-                    // 2. CARGAR A STAGING
+                    // Staging
                     if (allExtractedRecords.Any())
                     {
                         await dataLoader.LoadToStagingAsync(allExtractedRecords);
@@ -65,16 +62,14 @@ namespace EtlProject.Worker
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogCritical(ex, "El proceso ETL ha fallado de manera crítica.");
+                    _logger.LogCritical(ex, "El proceso de extracción ha fallado de manera crítica.");
                 }
                 finally
                 {
                     stopwatch.Stop();
-                    _logger.LogInformation("Proceso ETL finalizado en {ElapsedMilliseconds} ms.", stopwatch.ElapsedMilliseconds);
+                    _logger.LogInformation("Proceso de extracción finalizado en {ElapsedMilliseconds} ms.", stopwatch.ElapsedMilliseconds);
                 }
 
-                // Simulamos esperar 24 horas para la siguiente ejecución, 
-                // pero para pruebas lo dejamos en un loop largo o rompemos.
                 _logger.LogInformation("Esperando para el próximo ciclo ETL...");
                 await Task.Delay(TimeSpan.FromHours(24), stoppingToken);
             }
