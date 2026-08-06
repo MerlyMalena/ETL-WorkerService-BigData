@@ -94,3 +94,4 @@ c:\Users\pc\Desktop\Big Data\Arquitectura\EtlProject.Worker\obj\Debug\net8.0\ref
 c:\Users\pc\Desktop\Big Data\Arquitectura\EtlProject.Worker\obj\Debug\net8.0\EtlProject.Worker.pdb
 c:\Users\pc\Desktop\Big Data\Arquitectura\EtlProject.Worker\obj\Debug\net8.0\EtlProject.Worker.genruntimeconfig.cache
 c:\Users\pc\Desktop\Big Data\Arquitectura\EtlProject.Worker\obj\Debug\net8.0\ref\EtlProject.Worker.dll
+C:\Users\pc\Desktop\Big Data\Arquitectura\EtlProject.Worker\obj\Debug\net8.0\EtlProject.Worker.sourcelink.json

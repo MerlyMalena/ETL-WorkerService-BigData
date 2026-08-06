@@ -44,6 +44,10 @@ namespace EtlProject.Worker.Services
                     try { await databaseCreator.CreateTablesAsync(); } catch { }
                 }
 
+                // Limpiar la sala de espera (Staging) antes de ingresar los nuevos datos
+                _logger.LogInformation("Vaciando tabla temporal de Staging...");
+                try { await _dbContext.Database.ExecuteSqlRawAsync("TRUNCATE TABLE [staging].[ReviewStaging];"); } catch { }
+
                 // Staging (Insertar los datos)
                 await _dbContext.ReviewStaging.AddRangeAsync(data);
                 var savedCount = await _dbContext.SaveChangesAsync();

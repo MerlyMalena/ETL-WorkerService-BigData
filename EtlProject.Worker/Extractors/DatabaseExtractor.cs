@@ -42,13 +42,14 @@ namespace EtlProject.Worker.Extractors
               
                 var query = @"
                     SELECT 
-                        IdOpinion as ReviewId, 
-                        IdCliente as ClientId, 
-                        IdProducto as ProductId, 
-                        Fecha as ReviewDate, 
-                        Comentario as Comment, 
-                        PuntajeSatisfaccion as Rating 
-                    FROM web_reviews
+                        O.IdOpinion as ReviewId, 
+                        O.IdCliente as ClientId, 
+                        O.IdProducto as ProductId, 
+                        O.Fecha as ReviewDate, 
+                        O.Comentario as Comment, 
+                        R.Rating as Rating 
+                    FROM dbo.Opiniones O
+                    LEFT JOIN dbo.Reviews R ON O.IdOpinion = R.IdOpinion
                 ";
 
                 using var command = new SqlCommand(query, connection);
